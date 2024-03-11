@@ -1,0 +1,33 @@
+class Solution {
+public:
+    int maxVowels(string s, int k) {
+        int i=0,j=0;
+        int mx=INT_MIN;
+        int c=0; // vowel counter to keep the count of the vowels
+        string vowels="aeiouAEIOU"; // A Declared string to compare and find the vowels
+
+        while(j<s.size()){
+            if(vowels.find(s[j])!=-1){
+                c++;// if the s[j]'th character is a vowel we will increase the vowel counter 'c' by 1
+            }
+
+            // condition for window size less than k, then we will just increase 'j' to reach till window size 'k'
+            if(j-i+1<k){
+                j++;
+            }
+
+            // condition as soon as window size hits the value of k
+            // here we will store the count of vowels in mx and check if the 'i'th position character is a vowel
+            // if it is a vowel we will decrease the vowel counter 'c' by 1 before proceeding to slide our window
+            else if(j-i+1==k){
+                mx=max(c,mx);
+                if(vowels.find(s[i])!=-1){
+                    c--;
+                }
+                i++;
+                j++;
+            }
+        }
+        return mx;
+    }
+};
