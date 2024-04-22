@@ -1,6 +1,6 @@
 # LeetCode Practice Repository
 
-This repository contains my daily practice questions from LeetCode along with their solutions.
+This repository contains my daily practice questions from LeetCode along with their solutions in C++ language.
 
 ## Introduction
 
