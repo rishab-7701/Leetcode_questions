@@ -12,36 +12,62 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         
-    ListNode* l3=new ListNode(0);
-    ListNode* head=l3;
-    int carry=0;
-      while(l1 && l2){
-          // 9    // 7
-          int value=l1->val+l2->val+carry; // 9+7+0=16
-          carry=value/10; // 16/10=1
-          l3->next=new ListNode(value%10); // 16%10=6
-          l3=l3->next;
-          l1=l1->next;
-          l2=l2->next;
-      }
-      while(l1){
-          int value=l1->val+carry; 
-          carry=value/10; 
-          l3->next=new ListNode(value%10);
-          l3=l3->next;
-          l1=l1->next;
-      }
+    // ListNode* l3=new ListNode(0);
+    // ListNode* head=l3;
+    // int carry=0;
+    //   while(l1 && l2){
+    //       // 9    // 7
+    //       int value=l1->val+l2->val+carry; // 9+7+0=16
+    //       carry=value/10; // 16/10=1
+    //       l3->next=new ListNode(value%10); // 16%10=6
+    //       l3=l3->next;
+    //       l1=l1->next;
+    //       l2=l2->next;
+    //   }
+    //   while(l1){
+    //       int value=l1->val+carry; 
+    //       carry=value/10; 
+    //       l3->next=new ListNode(value%10);
+    //       l3=l3->next;
+    //       l1=l1->next;
+    //   }
 
-      while(l2){
-          int value=l2->val+carry; 
-          carry=value/10; 
-          l3->next=new ListNode(value%10); 
-          l3=l3->next;
-          l2=l2->next;
-      }
-      if(carry){
-          l3->next= new ListNode(carry);
-      }
-      return head->next;
+    //   while(l2){
+    //       int value=l2->val+carry; 
+    //       carry=value/10; 
+    //       l3->next=new ListNode(value%10); 
+    //       l3=l3->next;
+    //       l2=l2->next;
+    //   }
+    //   if(carry){
+    //       l3->next= new ListNode(carry);
+    //   }
+    //   return head->next;
+
+        ListNode* t1 = l1;
+        ListNode* t2 = l2;
+        ListNode* dummyNode = new ListNode(-1);
+        ListNode* curr = dummyNode;
+        int carry = 0;
+        
+        while(t1!=NULL || t2!=NULL){
+            int sum = carry;
+            if(t1) sum+=t1->val;
+            if(t2) sum+=t2->val;
+            
+            ListNode* newNode = new ListNode(sum%10);
+            carry = sum/10;
+            curr->next = newNode;
+            curr = curr->next;
+            
+            if(t1) t1 = t1->next;
+            if(t2) t2 = t2->next;
+        }
+        
+        if(carry){
+            ListNode* newNode = new ListNode(carry);
+            curr->next = newNode;
+        }
+        return dummyNode->next;
     }
 };
